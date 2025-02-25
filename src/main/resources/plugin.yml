@@ -1,6 +1,6 @@
 name: "PetsLogic"
 version: '1.0-DEV BUILD-7'
-main: "dev.mcishv.PetLogic.PetLogicMain"
+main: "dev.mcishv.PetLogic.PetLogic"
 api-version: '1.20'
 author: "MCishV"
 prefix: "PetL"
