@@ -1,6 +1,6 @@
 package dev.mcishv.PetLogic;
- 
-import dev.mcishv.PetLogic.commands.enablepet1;
+
+import dev.mcishv.PetLogic.commands.EnablePet1;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
@@ -15,7 +15,7 @@ public class PetLogicMain extends JavaPlugin {
     @Getter
     private static PetLogicMain instance;
 
-    private final Map<Player, ArmorStand> playerArmorStands = new HashMap<>();
+    public final Map<Player, ArmorStand> playerArmorStands = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -27,13 +27,15 @@ public class PetLogicMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        playerArmorStands.values().forEach(armorStand -> {
+        for (Map.Entry<Player, ArmorStand> entry : playerArmorStands.entrySet()) {
+            ArmorStand armorStand = entry.getValue();
             if (armorStand != null && !armorStand.isDead()) {
                 armorStand.remove();
             }
-        });
+        }
+
         playerArmorStands.clear();
-        Bukkit.getLogger().info("PetLogic отключен.");
+        Bukkit.getLogger().info("оптимизация");
     }
 
     private void logPluginInfo() {
@@ -47,6 +49,6 @@ public class PetLogicMain extends JavaPlugin {
     }
 
     private void registerCommands() {
-        getCommand("enablepet1").setExecutor(new enablepet1());
+        getCommand("enablepet1").setExecutor(new EnablePet1());
     }
 }
