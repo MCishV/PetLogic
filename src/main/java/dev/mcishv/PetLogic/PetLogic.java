@@ -1,6 +1,7 @@
 package dev.mcishv.PetLogic;
 
-import dev.mcishv.PetLogic.commands.EnablePet1;
+import dev.mcishv.PetLogic.commands.PetCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -9,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class PetLogicMain extends JavaPlugin {
+public class PetLogic extends JavaPlugin {
 
-    private static PetLogicMain instance;
+    private static PetLogic instance;
     private Logger logger;
 
     public final Map<Player, ArmorStand> playerArmorStands = new HashMap<>();
@@ -29,7 +30,7 @@ public class PetLogicMain extends JavaPlugin {
                 "=-=-=-=-=-=-=-=-=-=-=-=\n" +
                 "PetLogic включен " + getDescription().getVersion());
 
-        getCommand("EnablePet1").setExecutor(new EnablePet1(this));
+        getCommand("petlogic").setExecutor(new PetCommand(this));
     }
 
     @Override

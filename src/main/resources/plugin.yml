@@ -1,13 +1,17 @@
 name: "PetsLogic"
-version: '1.0-DEV BUILD-7'
+version: '1.0-DEV BUILD-9'
 main: "dev.mcishv.PetLogic.PetLogic"
 api-version: '1.20'
 author: "MCishV"
 prefix: "PetL"
 depend:
   - PlaceholderAPI
-description: "Plugin, that adds pets to your server"
+description: "A plugin that adds pets to your server."
 load: POSTWORLD
 commands:
-  enablepet1:
-    description: "Активировать пета 1"
+  pet:
+    description: Teleport to the spawn location.
+permissions:
+  petlogic.use:
+    description: Allows players to set the spawn location.
+    default: op
