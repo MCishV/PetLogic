@@ -21,11 +21,15 @@ public class PetLogicMain extends JavaPlugin {
         instance = this;
         logger = getLogger();
 
-        logger.info("Загружаем плагин PetLogic");
+        logger.info("\n=-=-=-=-=-=-=-=-=-=-=-=\n" +
+                "       PetLogic\n" +
+                "Version: " + getDescription().getVersion() + "\n" +
+                "Author: " + String.join(", ", getDescription().getAuthors()) + "\n" +
+                "Server Version: " + Bukkit.getServer().getVersion() + "\n" +
+                "=-=-=-=-=-=-=-=-=-=-=-=\n" +
+                "PetLogic включен " + getDescription().getVersion());
 
         getCommand("EnablePet1").setExecutor(new EnablePet1(this));
-
-        logger.info("Плагин PetLogic загружен.");
     }
 
     @Override
@@ -37,6 +41,6 @@ public class PetLogicMain extends JavaPlugin {
         }
         playerArmorStands.clear();
 
-        logger.info("Плагин PetLogic выключен.");
+        logger = null;
     }
 }
