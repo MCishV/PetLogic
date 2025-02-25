@@ -1,0 +1,13 @@
+name: "PetsLogic"
+version: '1.0-DEV BUILD-7'
+main: "dev.mcishv.PetLogic.PetLogicMain"
+api-version: '1.20'
+author: "MCishV"
+prefix: "PetL"
+depend:
+  - PlaceholderAPI
+description: "Plugin, that adds pets to your server"
+load: POSTWORLD
+commands:
+  enablepet1:
+    description: "Активировать пета 1"
