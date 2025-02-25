@@ -9,9 +9,8 @@ depend:
 description: "A plugin that adds pets to your server."
 load: POSTWORLD
 commands:
-  pet:
-    description: Teleport to the spawn location.
+  petlogic:
+    description: Main command.
 permissions:
   petlogic.use:
-    description: Allows players to set the spawn location.
     default: op
