@@ -1,11 +1,13 @@
 name: "PetsLogic"
-version: '1.0-DEV BUILD-12'
+version: '1.0-DEV BUILD-20'
 main: "dev.mcishv.PetLogic.PetLogic"
 api-version: '1.20'
 author: "MCishV"
 prefix: "PetL"
-depend:
+softdepend:
   - PlaceholderAPI
+depend:
+  - Vault
 description: "A plugin that adds pets to your server."
 load: POSTWORLD
 commands:
@@ -13,4 +15,38 @@ commands:
     description: Main command.
 permissions:
   petlogic.use:
+    default: op
+  petlogic.have:
+    default: op
+  petlogic.donate:
+    default: op
+  petlogic.1:
+    default: op
+  petlogic.2:
+    default: op
+  petlogic.3:
+    default: op
+  petlogic.4:
+    default: op
+  petlogic.5:
+    default: op
+  petlogic.6:
+    default: op
+  petlogic.7:
+    default: op
+  petlogic.8:
+    default: op
+  petlogic.9:
+    default: op
+  petlogic.10:
+    default: op
+  petlogic.11:
+    default: op
+  petlogic.12:
+    default: op
+  petlogic.13:
+    default: op
+  petlogic.14:
+    default: op
+  petlogic.15:
     default: op
