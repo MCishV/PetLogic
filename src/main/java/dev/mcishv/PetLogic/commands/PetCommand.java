@@ -96,17 +96,24 @@ public class PetCommand implements CommandExecutor {
         }
         return false;
     }
+
     private void removePlayerFull(Player player) {
         plugin.playerCountAS.remove(player);
         removeEntityAs(player);
         clearLists(player);
     }
+
     private void removeEntityAs(Player player) {
-        if(plugin.playerArmorStands.get(player) != null && !plugin.playerArmorStands.get(player).isDead()) plugin.playerArmorStands.get(player).remove();
-        if(plugin.playerArmorStands1.get(player) != null && !plugin.playerArmorStands1.get(player).isDead()) plugin.playerArmorStands1.get(player).remove();
-        if(plugin.playerArmorStands2.get(player) != null && !plugin.playerArmorStands2.get(player).isDead()) plugin.playerArmorStands2.get(player).remove();
-        if(plugin.playerArmorStands3.get(player) != null && !plugin.playerArmorStands3.get(player).isDead()) plugin.playerArmorStands3.get(player).remove();
+        if (plugin.playerArmorStands.get(player) != null && !plugin.playerArmorStands.get(player).isDead())
+            plugin.playerArmorStands.get(player).remove();
+        if (plugin.playerArmorStands1.get(player) != null && !plugin.playerArmorStands1.get(player).isDead())
+            plugin.playerArmorStands1.get(player).remove();
+        if (plugin.playerArmorStands2.get(player) != null && !plugin.playerArmorStands2.get(player).isDead())
+            plugin.playerArmorStands2.get(player).remove();
+        if (plugin.playerArmorStands3.get(player) != null && !plugin.playerArmorStands3.get(player).isDead())
+            plugin.playerArmorStands3.get(player).remove();
     }
+
     private void clearLists(Player player) {
         plugin.playerArmorStands.remove(player);
         plugin.playerArmorStands1.remove(player);
@@ -126,24 +133,19 @@ public class PetCommand implements CommandExecutor {
 
     public void openPetMenu(Player player) {
         Inventory petMenu = Bukkit.createInventory(null, size, "Улучшение питомцев");
-        for (int i = 0; i < size; i++) {
-            num = i;
-            if (i == size-5) {
-                ItemStack barrier = new ItemStack(Material.BARRIER);
-                ItemMeta barrierMeta = barrier.getItemMeta();
-                barrierMeta.setDisplayName("§r§fУдалить всех питомцев");
-                barrier.setItemMeta(barrierMeta);
-                petMenu.setItem(i, barrier);
-                continue;
-            } else if (i == size-6 || i == size-4) {
-                continue;
-            } else if (i == size-3 || i == size-2 || i == size-1) {
-                num = i - 3;
-            }
-            ItemStack petItem0 = plugin.petCreator.get_obj_head(String.valueOf(num + 1));
-
-            petMenu.setItem(i, petItem0);
-        }
+        
+        ItemStack barrier = new ItemStack(Material.BARRIER);
+        ItemMeta barrierMeta = barrier.getItemMeta();
+        barrierMeta.setDisplayName("§r§fУдалить всех питомцев");
+        barrier.setItemMeta(barrierMeta);
+        
+        petMenu.setItem(size - 5, barrier);
+        petMenu.setItem(size - 6, plugin.petCreator.get_obj_head("1"));
+        petMenu.setItem(size - 4, plugin.petCreator.get_obj_head("2"));
+        petMenu.setItem(size - 3, plugin.petCreator.get_obj_head("3"));
+        petMenu.setItem(size - 2, plugin.petCreator.get_obj_head("4"));
+        petMenu.setItem(size - 1, plugin.petCreator.get_obj_head("5"));
+        
         plugin.inventoryManager.put(player, petMenu);
         player.openInventory(petMenu);
     }
