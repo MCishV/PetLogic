@@ -38,7 +38,7 @@ public class PetLogic extends JavaPlugin {
     public final Map<Player, ArmorStand> playerArmorStands1 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands2 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands3 = new HashMap<>();
-    public Map<Player, List<String>> equipped = new HashMap<>();
+    public final Map<Player, List<String>> equipped = new HashMap<>();
 
     @Override
     public void onEnable() {

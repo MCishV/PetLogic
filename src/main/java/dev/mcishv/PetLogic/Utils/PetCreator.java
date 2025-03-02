@@ -27,36 +27,38 @@ public class PetCreator {
     public void CreateArmorStand(Player player, String[] args) {
         Location playerLocation = player.getLocation();
         if (player.hasPermission("petlogic.have")) {
-            if (plugin.playerCountAS.get(player) == null || plugin.playerCountAS.get(player) == 0) {
+            if (plugin.playerCountAS.get(player) == null || plugin.playerCountAS.get(player) == 0 || plugin.equipped.get(player).get(0).equals("1000000")) {
                 ArmorStand armorStand = player.getWorld().spawn(playerLocation, ArmorStand.class);
                 createArmorStandForPlayer(player, args, armorStand, plugin.playerArmorStands, plugin.playerCountAS, 180);
-                plugin.equipped.put(player, List.of(args[1]));
+                List<String> list = new ArrayList<>();
+                list.add(0, args[1]);
+                plugin.equipped.put(player, list);
                 player.sendMessage(prefix + "Питомец создан.");
-            } else if (plugin.playerCountAS.get(player) == 1) {
+            } else if (plugin.playerCountAS.get(player) == 1 || plugin.equipped.get(player).get(1).equals("1000000")) {
                 ArmorStand armorStand = player.getWorld().spawn(playerLocation, ArmorStand.class);
                 createArmorStandForPlayer(player, args, armorStand, plugin.playerArmorStands1, plugin.playerCountAS, 0);
                 player.sendMessage(prefix + "Питомец создан.");
                 List<String> ints = plugin.equipped.get(player);
-                ints.add(args[1]);
+                ints.add(1, args[1]);
                 plugin.equipped.put(player, ints);
-            } else if (plugin.playerCountAS.get(player) == 2) {
+            } else if (plugin.playerCountAS.get(player) == 2 || plugin.equipped.get(player).get(2).equals("1000000")) {
                 if (player.hasPermission("petlogic.donate")) {
                     ArmorStand armorStand = player.getWorld().spawn(playerLocation, ArmorStand.class);
                     createArmorStandForPlayer(player, args, armorStand, plugin.playerArmorStands2, plugin.playerCountAS, 240);
                     List<String> ints = plugin.equipped.get(player);
-                    ints.add(args[1]);
+                    ints.add(2, args[1]);
                     plugin.equipped.put(player, ints);
                     player.sendMessage(prefix + "Питомец создан.");
                 } else {
                     player.sendMessage(prefix + "Вы достигли максимума по количеству питомцев. Вы можете расширить лимит до 4 купив привелегию.");
                 }
 
-            } else if (plugin.playerCountAS.get(player) == 3) {
+            } else if (plugin.playerCountAS.get(player) == 3 || plugin.equipped.get(player).get(3).equals("1000000")) {
                 if (player.hasPermission("petlogic.donate")) {
                     ArmorStand armorStand = player.getWorld().spawn(playerLocation, ArmorStand.class);
                     createArmorStandForPlayer(player, args, armorStand, plugin.playerArmorStands3, plugin.playerCountAS, 300);
                     List<String> ints = plugin.equipped.get(player);
-                    ints.add(args[1]);
+                    ints.add(3, args[1]);
                     plugin.equipped.put(player, ints);
                     player.sendMessage(prefix + "Питомец создан.");
                 } else {

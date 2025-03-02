@@ -5,6 +5,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
+import java.util.List;
 
 public class PetDelete {
     private final String prefix = "";
@@ -22,12 +23,22 @@ public class PetDelete {
         }
         if (targetMap.get(player) != null) {
             targetMap.get(player).remove();
+            if (plugin.playerCountAS.get(player) != null) {
+                plugin.playerCountAS.compute(player, (k, count) -> count - 1);
+            }
+        }
+        if (plugin.playerCountAS.get(player) == 0) {
+            plugin.equipped.remove(player);
+        } else {
+            int ind = plugin.equipped.get(player).indexOf(id);
+            List<String> l = plugin.equipped.get(player);
+            l.add(ind, "1000000");
+            plugin.equipped.put(player, l);
         }
         targetMap.remove(player);
-        plugin.equipped.get(player).remove(id);
     }
     private Map<Player, ArmorStand> getMapById(String id, Player player) {
-        int index = plugin.equipped.get(player).indexOf(id);
+        int index = plugin.equipped.get(player).indexOf(id) + 1;
         return switch(index) {
             case 1 -> plugin.playerArmorStands;
             case 2 -> plugin.playerArmorStands1;

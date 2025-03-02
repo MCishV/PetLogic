@@ -51,7 +51,7 @@ public class MenuManager implements Listener {
                         } else {
                             if(player.hasPermission(plugin.petCreator.get_obj_permission(String.valueOf(i)))) {
                                 if(plugin.equipped.get(player) != null) {
-                                    if (!plugin.equipped.get(player).contains(i + "")) {
+                                    if (!plugin.equipped.get(player).contains(String.valueOf(i))) {
                                         plugin.petCreator.CreateArmorStand(player, new String[]{"", String.valueOf(i)});
                                     } else {
                                         plugin.petDelete.deleteArmorStand(player, String.valueOf(i));
