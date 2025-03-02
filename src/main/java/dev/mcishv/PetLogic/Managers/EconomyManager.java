@@ -1,4 +1,4 @@
-package dev.mcishv.PetLogic.utils;
+package dev.mcishv.PetLogic.Managers;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;

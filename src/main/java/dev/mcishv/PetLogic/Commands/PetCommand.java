@@ -1,28 +1,19 @@
-package dev.mcishv.PetLogic.commands;
+package dev.mcishv.PetLogic.Commands;
 
 import dev.mcishv.PetLogic.PetLogic;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Arrays;
 
 @Getter
 public class PetCommand implements CommandExecutor {
@@ -53,10 +44,6 @@ public class PetCommand implements CommandExecutor {
                         openPetMenu(player);
                         return true;
                     }
-                    if (args[0].equalsIgnoreCase("enable")) {
-                        player.sendMessage("§e/pet enable <номер_текстуры> §7> Создать голову питомца. \n" + prefix + "§e/pet disable §7> Удалить голову питомца.");
-                        return true;
-                    }
                     if (args[0].equalsIgnoreCase("disable")) {
                         if (plugin.playerCountAS.get(player) == null) {
                             player.sendMessage(prefix + "Питомцы не найдены");
@@ -74,21 +61,6 @@ public class PetCommand implements CommandExecutor {
                     player.sendMessage(prefix + "§e/pet enable <номер_текстуры> §7> Создать голову питомца. \n" + prefix + "§e/pet disable §7> Удалить голову питомца.");
                 }
                 return true;
-            } else if (args.length == 2) {
-                try {
-                    int value = Integer.parseInt(args[1]);
-                    if (value < 1 || value > 5) {
-                        player.sendMessage(prefix + "Можно выбрать текстуру только от 1 до 5");
-                        return true;
-                    }
-                } catch (NumberFormatException e) {
-                    player.sendMessage(prefix + "§e/pet enable <номер_текстуры> §7> Создать голову питомца. \n" + prefix + "§e/pet disable §7> Удалить голову питомца.");
-                    return true;
-                }
-                if (args[0].equalsIgnoreCase("enable")) {
-                    plugin.petCreator.CreateArmorStand(player, args);
-                    return true;
-                }
             } else {
                 player.sendMessage(prefix + "§e/pet enable <номер_текстуры> §7> Создать голову питомца. \n§e/pet disable §7> Удалить голову питомца.");
                 return false;
@@ -121,7 +93,7 @@ public class PetCommand implements CommandExecutor {
     }
 
     private int num;
-    public int size = 18;
+    public int size = 36;
     private ItemStack petItem0 = new ItemStack(Material.PLAYER_HEAD);
 
     public void openPetMenu(Player player) {
@@ -132,6 +104,7 @@ public class PetCommand implements CommandExecutor {
                 ItemStack barrier = new ItemStack(Material.BARRIER);
                 ItemMeta barrierMeta = barrier.getItemMeta();
                 barrierMeta.setDisplayName("§r§fУдалить всех питомцев");
+                barrierMeta.setLore(Arrays.asList("", "§r§7Удалит сущности всех заспавненных питомцев", "§r§7Вы сможете вызвать их повторно в этом меню"));
                 barrier.setItemMeta(barrierMeta);
                 petMenu.setItem(i, barrier);
                 continue;
@@ -144,7 +117,6 @@ public class PetCommand implements CommandExecutor {
 
             petMenu.setItem(i, petItem0);
         }
-        plugin.inventoryManager.put(player, petMenu);
         player.openInventory(petMenu);
     }
 }

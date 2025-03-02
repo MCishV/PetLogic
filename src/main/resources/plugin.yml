@@ -1,5 +1,5 @@
 name: "PetsLogic"
-version: '1.0-DEV BUILD-20'
+version: '1.0-DEV BUILD-22'
 main: "dev.mcishv.PetLogic.PetLogic"
 api-version: '1.20'
 author: "MCishV"
@@ -49,4 +49,40 @@ permissions:
   petlogic.14:
     default: op
   petlogic.15:
+    default: op
+  petlogic.16:
+    default: op
+  petlogic.17:
+    default: op
+  petlogic.18:
+    default: op
+  petlogic.19:
+    default: op
+  petlogic.20:
+    default: op
+  petlogic.21:
+    default: op
+  petlogic.22:
+    default: op
+  petlogic.23:
+    default: op
+  petlogic.24:
+    default: op
+  petlogic.25:
+    default: op
+  petlogic.26:
+    default: op
+  petlogic.27:
+    default: op
+  petlogic.28:
+    default: op
+  petlogic.29:
+    default: op
+  petlogic.30:
+    default: op
+  petlogic.31:
+    default: op
+  petlogic.32:
+    default: op
+  petlogic.33:
     default: op

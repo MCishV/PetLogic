@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "dev.mcishv.PetLogic"
-version = "1.0-DEV BUILD-20"
+version = "1.0-DEV BUILD-22"
 
 repositories {
     maven {

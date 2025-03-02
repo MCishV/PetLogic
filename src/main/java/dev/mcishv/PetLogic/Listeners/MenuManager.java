@@ -16,6 +16,8 @@ public class MenuManager implements Listener {
         this.plugin = plugin;
     }
 
+    private final String prefix = "§bPetLogic §7>§f ";
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.isShiftClick()) return;
@@ -33,9 +35,25 @@ public class MenuManager implements Listener {
                         if (clickedItem.getType() == Material.BARRIER) {
                             plugin.petCommand.deleteAllPets(player);
                         } else if (i == size || i == size - 1 || i == size - 2) {
-                            plugin.petCreator.CreateArmorStand(player, new String[]{"", (i - 3) + ""});
+                            if(player.hasPermission(plugin.petCreator.get_obj_permission("" + (i - 3)))) {
+                                if(!plugin.equipped.get(player).contains(i-3 + "")) {
+                                    plugin.petCreator.CreateArmorStand(player, new String[]{"", (i - 3) + ""});
+                                } else {
+                                    plugin.petCreator.deleteArmorStand(player, (i-3) + "");
+                                }
+                            } else {
+                                player.sendMessage(prefix + "У вас нет такого питомца. Открывайте кейсы чтобы заполучить его!");
+                            }
                         } else {
-                            plugin.petCreator.CreateArmorStand(player, new String[]{"", (i) + ""});
+                            if(player.hasPermission(plugin.petCreator.get_obj_permission("" + (i)))) {
+                                if (!plugin.equipped.get(player).contains(i + "")) {
+                                    plugin.petCreator.CreateArmorStand(player, new String[]{"", (i) + ""});
+                                } else {
+                                    plugin.petCreator.deleteArmorStand(player, (i) + "");
+                                }
+                            } else {
+                                player.sendMessage(prefix + "У вас нет такого питомца. Открывайте кейсы чтобы заполучить его!");
+                            }
                         }
                         player.closeInventory();
                     }

@@ -1,19 +1,20 @@
 package dev.mcishv.PetLogic;
 
-import dev.mcishv.PetLogic.commands.PetCommand;
-import dev.mcishv.PetLogic.utils.EconomyManager;
+import dev.mcishv.PetLogic.Commands.PetCommand;
+import dev.mcishv.PetLogic.Managers.EconomyManager;
 import dev.mcishv.PetLogic.Listeners.MenuManager;
-import dev.mcishv.PetLogic.utils.PetCreator;
+import dev.mcishv.PetLogic.Utils.PetCreator;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -22,19 +23,19 @@ public class PetLogic extends JavaPlugin {
     public PetCommand petCommand;
     private static Economy econ = null;
     public EconomyManager economyManager;
-    public MenuManager openGUI;
+    public MenuManager menuManager;
+    private FileConfiguration languageConfig;
     @Getter
     private static PetLogic instance;
     @Getter
     public static Logger jlogger;
-
-    public final Map<Player, Inventory> inventoryManager = new HashMap<>();
 
     public final Map<Player, Integer> playerCountAS = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands1 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands2 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands3 = new HashMap<>();
+    public final Map<Player, List<String>> equipped = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -52,7 +53,7 @@ public class PetLogic extends JavaPlugin {
         jlogger.info("Author: " + String.join(", ", getDescription().getAuthors()));
         jlogger.info("Server Version: " + Bukkit.getServer().getVersion());
         jlogger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        jlogger.info("§APetLogic включен " + getDescription().getVersion());
+        jlogger.info("§APetLogic " + getDescription().getVersion() + " enabled");
 
         economyManager = new EconomyManager(econ);
         petCreator = new PetCreator(this);
