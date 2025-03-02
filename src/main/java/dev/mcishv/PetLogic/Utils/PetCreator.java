@@ -76,8 +76,8 @@ public class PetCreator {
         armorStand.setCollidable(false);
         armorStand.setInvulnerable(true);
 
+        armorStand.setCustomName(get_obj_name(args[1]));
         armorStand.setHelmet(get_obj_head(args[1]));
-
         int how_many = 0;
 
         if (playerCountAS.get(player) != null) {
@@ -104,19 +104,6 @@ public class PetCreator {
                 armorStand.teleport(armorStandLocation);
             }
         }.runTaskTimer(plugin, 0L, 3L);
-    }
-
-    public void deleteArmorStand(Player player, String id) {
-        Map<Player, ArmorStand> targetMap = getMapById(id, player);
-        if (targetMap == null) return;
-        if (!targetMap.containsKey(player)) {
-            return;
-        }
-        if (targetMap.get(player) != null) {
-            targetMap.get(player).remove();
-        }
-        targetMap.remove(player);
-        plugin.equipped.get(player).remove(id);
     }
 
     private String[] getTexture(String texture) {
@@ -327,16 +314,5 @@ public class PetCreator {
         String second = "§r§fБонус 1.02х"; // + bonus;
         String third = "§r§fУлучшить - 100$"; // + upgradecost;
         return Arrays.asList(first, second, third);
-    }
-
-    private Map<Player, ArmorStand> getMapById(String id, Player player) {
-        int index = plugin.equipped.get(player).indexOf(id);
-        return switch(index) {
-            case 1 -> plugin.playerArmorStands;
-            case 2 -> plugin.playerArmorStands1;
-            case 3 -> plugin.playerArmorStands2;
-            case 4 -> plugin.playerArmorStands3;
-            default -> null;
-        };
     }
 }

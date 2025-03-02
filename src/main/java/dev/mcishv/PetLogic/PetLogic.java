@@ -4,6 +4,7 @@ import dev.mcishv.PetLogic.Commands.PetCommand;
 import dev.mcishv.PetLogic.Managers.EconomyManager;
 import dev.mcishv.PetLogic.Listeners.MenuManager;
 import dev.mcishv.PetLogic.Utils.PetCreator;
+import dev.mcishv.PetLogic.Utils.PetDelete;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -13,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
 
 public class PetLogic extends JavaPlugin {
     public PetCreator petCreator;
+    public PetDelete petDelete;
     public PetCommand petCommand;
     private static Economy econ = null;
     public EconomyManager economyManager;
@@ -35,7 +38,7 @@ public class PetLogic extends JavaPlugin {
     public final Map<Player, ArmorStand> playerArmorStands1 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands2 = new HashMap<>();
     public final Map<Player, ArmorStand> playerArmorStands3 = new HashMap<>();
-    public final Map<Player, List<String>> equipped = new HashMap<>();
+    public Map<Player, List<String>> equipped = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -46,7 +49,12 @@ public class PetLogic extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-
+        petCreator = new PetCreator(this);
+        petDelete = new PetDelete(this);
+        economyManager = new EconomyManager(econ);
+        petCommand = new PetCommand(this);
+        getCommand("petlogic").setExecutor(new PetCommand(this));
+        Bukkit.getServer().getPluginManager().registerEvents(new MenuManager(this), this);
         jlogger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         jlogger.info("                PetLogic");
         jlogger.info("Version: " + getDescription().getVersion());
@@ -54,12 +62,6 @@ public class PetLogic extends JavaPlugin {
         jlogger.info("Server Version: " + Bukkit.getServer().getVersion());
         jlogger.info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         jlogger.info("§APetLogic " + getDescription().getVersion() + " enabled");
-
-        economyManager = new EconomyManager(econ);
-        petCreator = new PetCreator(this);
-        petCommand = new PetCommand(this);
-        getCommand("petlogic").setExecutor(new PetCommand(this));
-        Bukkit.getServer().getPluginManager().registerEvents(new MenuManager(this), this);
     }
 
     @Override
